@@ -1,6 +1,11 @@
 import "./style.css";
 import QRCode from "qrcode";
 import { CurrencyCode, encode, PaymentOptions } from "bysquare";
+import { Buffer } from "buffer";
+
+if (!globalThis.Buffer) {
+  globalThis.Buffer = Buffer;
+}
 
 const ANIMALS = [
   "kočka",
