@@ -6,4 +6,15 @@ export default defineConfig({
   // (e.g. https://example.github.io/) or under a repository path
   // (e.g. https://example.github.io/project/).
   base: "./",
+  resolve: {
+    alias: {
+      buffer: "buffer/",
+    },
+  },
+  build: {
+    // Emit the production build into "docs" so GitHub Pages can serve it
+    // without requiring an additional build pipeline.
+    outDir: "docs",
+    emptyOutDir: true,
+  },
 });
