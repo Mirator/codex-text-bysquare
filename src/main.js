@@ -25,23 +25,15 @@ const ANIMALS = [
   "srna"
 ];
 
-const PAYMENT_DETAILS = {
-  accountNumber: "13103019995234450010000001",
-  iban: "PL13103019995234450010000001",
-  bic: "CITIPLPX",
+const PAYMENT_TEMPLATE = {
   amount: 1,
-  currency: "EUR",
-  variableSymbol: "1"
-};
-
-const PAYMENT_MODEL = {
-  amount: PAYMENT_DETAILS.amount,
-  variableSymbol: PAYMENT_DETAILS.variableSymbol,
+  variableSymbol: "1",
   currencyCode: CurrencyCode.EUR,
   bankAccounts: [
     {
-      iban: PAYMENT_DETAILS.iban,
-      bic: PAYMENT_DETAILS.bic
+      iban: "PL13103019995234450010000001",
+      bic: "CITIPLPX",
+      accountNumber: "13103019995234450010000001"
     }
   ]
 };
@@ -63,23 +55,23 @@ app.innerHTML = `
       <dl>
         <div>
           <dt>Číslo účtu</dt>
-          <dd>${PAYMENT_DETAILS.accountNumber}</dd>
+          <dd>${PAYMENT_TEMPLATE.bankAccounts[0].accountNumber}</dd>
         </div>
         <div>
           <dt>IBAN</dt>
-          <dd>${PAYMENT_DETAILS.iban}</dd>
+          <dd>${PAYMENT_TEMPLATE.bankAccounts[0].iban}</dd>
         </div>
         <div>
           <dt>SWIFT/BIC</dt>
-          <dd>${PAYMENT_DETAILS.bic}</dd>
+          <dd>${PAYMENT_TEMPLATE.bankAccounts[0].bic}</dd>
         </div>
         <div>
           <dt>Částka</dt>
-          <dd>${PAYMENT_DETAILS.amount.toFixed(2)} ${PAYMENT_DETAILS.currency}</dd>
+          <dd>${PAYMENT_TEMPLATE.amount.toFixed(2)} EUR</dd>
         </div>
         <div>
           <dt>Variabilní symbol</dt>
-          <dd>${PAYMENT_DETAILS.variableSymbol}</dd>
+          <dd>${PAYMENT_TEMPLATE.variableSymbol}</dd>
         </div>
         <div>
           <dt>Zpráva pro příjemce</dt>
@@ -123,7 +115,7 @@ async function generateQrCode() {
         {
           type: PaymentOptions.PaymentOrder,
           paymentNote: animal,
-          ...PAYMENT_MODEL
+          ...PAYMENT_TEMPLATE
         }
       ]
     },
