@@ -20,12 +20,16 @@ npm run build
 
 ## Deployment
 
-The project is ready for the default **GitHub Pages** workflow that GitHub
-generates when you choose **GitHub Actions** as the deployment source. The
-workflow installs dependencies, runs `npm run build`, and publishes the contents
-of the `dist` directory. No custom workflow file is required in the repository.
+GitHub Pages deployments are handled by the `Deploy to GitHub Pages` workflow in
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The workflow
+builds the site on every push to `main` and publishes the production-ready files
+from the `dist` directory.
 
-When configuring Pages, select **Static HTML** (or the generic workflow) and use
-the default build command (`npm run build`) and output directory (`dist`). The
-Vite configuration uses a relative base path so the generated bundle works both
-for user/organization sites and for repository project pages.
+To enable automatic deployments:
+
+1. Open the repository settings on GitHub.
+2. Navigate to **Pages** and choose **GitHub Actions** as the deployment source.
+3. Trigger a push to `main` (or run the workflow manually) to publish the site.
+
+The Vite configuration uses `/codex-text-bysquare/` as the base path so the
+bundle works when published from this repository.
