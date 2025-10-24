@@ -1,0 +1,18 @@
+{
+  "name": "codex-text-bysquare",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bysquare": "^2.13.1",
+    "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "vite": "^5.3.1"
+  }
+}
