@@ -18,6 +18,14 @@ npm run dev
 npm run build
 ```
 
-The static assets in the `dist` folder can be deployed to GitHub Pages. The Vite
-configuration uses `/codex-text-bysquare/` as the base path so the bundle works
-when published from this repository.
+## Deployment
+
+The project is ready for the default **GitHub Pages** workflow that GitHub
+generates when you choose **GitHub Actions** as the deployment source. The
+workflow installs dependencies, runs `npm run build`, and publishes the contents
+of the `dist` directory. No custom workflow file is required in the repository.
+
+When configuring Pages, select **Static HTML** (or the generic workflow) and use
+the default build command (`npm run build`) and output directory (`dist`). The
+Vite configuration uses a relative base path so the generated bundle works both
+for user/organization sites and for repository project pages.
