@@ -86,6 +86,23 @@ app.innerHTML = `
     </section>
 
     <canvas id="qr-canvas" width="320" height="320" role="img" aria-label="PAY by Square QR kód"></canvas>
+
+    <section class="history" aria-live="polite">
+      <h2>Historie generovaných zpráv</h2>
+      <p class="history-description">
+        Sledujte, jaké zprávy byly použity při vytváření jednotlivých QR kódů.
+      </p>
+      <table id="history-table" class="history-table" hidden>
+        <thead>
+          <tr>
+            <th scope="col">Zpráva pro příjemce</th>
+            <th scope="col">Čas vygenerování</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+      <p id="history-empty" class="history-empty">QR kód zatím nebyl vygenerován.</p>
+    </section>
   </div>
 `;
 
@@ -93,14 +110,79 @@ const messageElement = document.querySelector("#message");
 const statusElement = document.querySelector("#status");
 const canvas = document.querySelector("#qr-canvas");
 const button = document.querySelector("#generate");
+const historyTable = document.querySelector("#history-table");
+const historyTableBody = document.querySelector("#history-body");
+const historyEmptyState = document.querySelector("#history-empty");
 
-if (!(messageElement instanceof HTMLElement && statusElement instanceof HTMLElement && canvas instanceof HTMLCanvasElement && button instanceof HTMLButtonElement)) {
+if (
+  !(
+    messageElement instanceof HTMLElement &&
+    statusElement instanceof HTMLElement &&
+    canvas instanceof HTMLCanvasElement &&
+    button instanceof HTMLButtonElement &&
+    historyTable instanceof HTMLElement &&
+    historyTableBody instanceof HTMLElement &&
+    historyEmptyState instanceof HTMLElement
+  )
+) {
   throw new Error("Unable to initialize application UI");
 }
 
 function pickRandomAnimal() {
   return ANIMALS[Math.floor(Math.random() * ANIMALS.length)];
 }
+
+const timeFormatter = new Intl.DateTimeFormat("cs-CZ", {
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit"
+});
+
+const historyEntries = [];
+
+function formatTimestamp(date) {
+  return timeFormatter.format(date);
+}
+
+function renderHistory() {
+  historyTableBody.innerHTML = "";
+
+  if (historyEntries.length === 0) {
+    historyTable.hidden = true;
+    historyEmptyState.hidden = false;
+    return;
+  }
+
+  historyTable.hidden = false;
+  historyEmptyState.hidden = true;
+
+  for (const entry of historyEntries) {
+    const row = document.createElement("tr");
+    const messageCell = document.createElement("td");
+    messageCell.textContent = entry.message;
+
+    const timeCell = document.createElement("td");
+    const timeElement = document.createElement("time");
+    timeElement.dateTime = entry.timestamp.toISOString();
+    timeElement.textContent = formatTimestamp(entry.timestamp);
+    timeCell.append(timeElement);
+
+    row.append(messageCell, timeCell);
+    historyTableBody.append(row);
+  }
+}
+
+function addHistoryEntry(message, timestamp) {
+  historyEntries.unshift({ message, timestamp });
+
+  if (historyEntries.length > 10) {
+    historyEntries.pop();
+  }
+
+  renderHistory();
+}
+
+renderHistory();
 
 async function generateQrCode() {
   button.disabled = true;
@@ -131,11 +213,9 @@ async function generateQrCode() {
     }
   });
 
-  statusElement.textContent = `Poslední aktualizace: ${new Intl.DateTimeFormat("cs-CZ", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-  }).format(new Date())}`;
+  const generatedAt = new Date();
+  statusElement.textContent = `Poslední aktualizace: ${formatTimestamp(generatedAt)}`;
+  addHistoryEntry(animal, generatedAt);
   button.disabled = false;
 }
 
