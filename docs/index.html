@@ -5,19 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PAY by Square Generator</title>
+    <script type="module" crossorigin src="./assets/index-XpQcquLc.js"></script>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module">
-      const env = import.meta.env;
-
-      if (env && env.DEV) {
-        import("./src/main.js");
-      } else if (env && env.PROD) {
-        import("./src/main.js");
-      } else {
-        window.location.replace("./docs/index.html");
-      }
-    </script>
   </body>
 </html>
