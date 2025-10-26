@@ -1,6 +1,6 @@
 import "./style.css";
 import QRCode from "./vendor-qrcode.js";
-import { CurrencyCode, encode, PaymentOptions } from "bysquare";
+import { CurrencyCode, encode, PaymentOptions } from "./vendor-bysquare.js";
 import { Buffer } from "buffer";
 
 if (!globalThis.Buffer) {
