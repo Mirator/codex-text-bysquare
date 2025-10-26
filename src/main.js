@@ -1,4 +1,4 @@
-import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.esm.js";
+import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm";
 import {
   CurrencyCode,
   encode,
