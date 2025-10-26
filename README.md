@@ -9,6 +9,7 @@ browser-ready ES module without any bundlers or build tooling.
 1. Open `index.html` in any modern browser.
 2. Click **Vygenerovat nový QR kód** to create a fresh payment message and QR.
 
-The page fetches the [`bysquare`](https://www.npmjs.com/package/bysquare) and
+The page fetches the [`bysquare`](https://www.npmjs.com/package/bysquare) (via
+jsDelivr's `+esm` endpoint so browser dependencies are rewritten) and
 [`qrcode`](https://www.npmjs.com/package/qrcode) modules directly from a CDN at
 runtime, keeping the repository lightweight.

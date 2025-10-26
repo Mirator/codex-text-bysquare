@@ -1,9 +1,9 @@
-import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.mjs";
+import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.esm.js";
 import {
   CurrencyCode,
   encode,
   PaymentOptions
-} from "https://cdn.jsdelivr.net/npm/bysquare@2.13.1/lib/index.js";
+} from "https://cdn.jsdelivr.net/npm/bysquare@2.13.1/+esm";
 
 const ANIMALS = [
   "kočka",
