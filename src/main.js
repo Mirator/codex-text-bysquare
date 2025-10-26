@@ -1,11 +1,9 @@
-import "./style.css";
-import QRCode from "./vendor-qrcode.js";
-import { CurrencyCode, encode, PaymentOptions } from "./vendor-bysquare.js";
-import { Buffer } from "buffer";
-
-if (!globalThis.Buffer) {
-  globalThis.Buffer = Buffer;
-}
+import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.mjs";
+import {
+  CurrencyCode,
+  encode,
+  PaymentOptions
+} from "https://cdn.jsdelivr.net/npm/bysquare@2.13.1/lib/index.js";
 
 const ANIMALS = [
   "kočka",
