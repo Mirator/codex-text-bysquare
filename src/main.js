@@ -3,7 +3,7 @@ import {
   CurrencyCode,
   encode,
   PaymentOptions
-} from "https://cdn.jsdelivr.net/npm/bysquare@2.13.1/lib/index.js";
+} from "https://cdn.jsdelivr.net/npm/bysquare@2.13.1/+esm";
 
 const ANIMALS = [
   "kočka",
