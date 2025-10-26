@@ -1,5 +1,5 @@
 import "./style.css";
-import QRCode from "qrcode";
+import QRCode from "./vendor-qrcode.js";
 import { CurrencyCode, encode, PaymentOptions } from "bysquare";
 import { Buffer } from "buffer";
 
